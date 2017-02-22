@@ -4,12 +4,12 @@ var webpack           = require('webpack');
 var merge             = require('webpack-merge');
 
 var TARGET    = process.env.npm_lifecycle_event;
-var ROOT_PATH = path.resolve(__dirname); 
+var ROOT_PATH = path.resolve(__dirname);
 
 var common = {
   entry: path.resolve(ROOT_PATH, 'src'),
   resolve: {
-    extensions: ['', '.js', '.jsx', '.html']
+    extensions: ['', '.js', '.jsx', '.html', '.css']
   },
   output: {
     path: path.resolve(ROOT_PATH, 'build'),
@@ -21,6 +21,13 @@ var common = {
         test: /\.css$/,
         loaders: ['style', 'css'],
         include: path.resolve(ROOT_PATH, 'src')
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loaders: ['url', 'file'],
+        options: {
+          limit: 250000,
+        },
       }
     ]
   },

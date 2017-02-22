@@ -30,18 +30,18 @@ class SearchArea extends React.Component {
 
   render() {
     return (
-      <form style={{position: "relative", margin:"auto", display:"table"}} className="form-inline" onSubmit={event => this.onFormSubmit(event)}>
-        <div className="input-group">
-          <input className="form-control" type="text" value={this.state.city}
+      <form className="center form-bottom" onSubmit={event => this.onFormSubmit(event)}>
+        <div>
+          <input className="location-input " type="text" value={this.state.city}
                  onChange={ event => this.onCityChange(event.target.value) }
                  placeholder="city"
                  />
-          <input className="form-control" type="text" value={this.state.state}
+          <input className="location-input" type="text" value={this.state.state}
                  onChange={ event => this.onStateChange(event.target.value) }
                  placeholder="state"
                  />
-          <span className="input-group-addon">
-            <button type="submit" className="btn btn-secondary">search</button>
+          <span>
+            <button type="submit" className="submit-button">search</button>
           </span>
         </div>
 

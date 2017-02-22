@@ -1,32 +1,50 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeIndex } from '../actions/index';
 
 
-const Forecast = ({data}) => {
-  
-  let styles = {
-    height: 70,
-    width: 80,
-    top: 300,
-    backgroundColor: 'yellow',
-    display: 'inline-block',
-    fontSize: '0.7em',
-    listStyleType: 'none'
+class Forecast extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  return (
-    <div>
-      { data ? data.map( (item, key) => 
-        <div style={styles} key={key} >{ item.day }
-          <ul style={{listStyleType: 'none', margin: '0px', padding:'0px'}}>
-            <li>{ item.date }</li>
-            <li>{ item.high }f.</li>
-            <li>{ item.low }f.</li>
-            <li>{ item.text }</li>
-          </ul>
-        </div>) : <h3 style={{position: "relative", margin:"auto", display:"table"}}>Please enter a city and a state</h3> 
-      }
-    </div>
-  )
+  handleClick(event) {
+    this.props.changeIndex(event);
+  }
+  
+
+  render() {
+
+    let { data } = this.props.state;
+
+    return (
+      <div className="center" >
+        { data ? data.map( (item, index) => { 
+          let boundClickItem = this.handleClick.bind(this, index);
+          return (
+          <div className="forecastItem" key={index} onClick={boundClickItem}>{ item.day } &nbsp;
+            <ul className="forecast-list">
+              <li className="listItem">{ item.date }</li>
+            </ul>
+          </div>)}) : <h3 className="center">Please enter a city and a state</h3> }
+      </div>
+    )
+  }
 }
 
-export default Forecast;
+const mapStateToProps = (state) => {
+  return {
+    state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({changeIndex}, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Forecast);
+

@@ -7,22 +7,9 @@ const getURL = function(city, state) {
 }
 
 
-export function fetchWeatherRequest() {
-  return {
-    type: 'FETCH_WEATHER',
-  }
-}
-
 export function fetchWeatherSuccess(data) {
   return {
     type: 'FETCH_WEATHER_SUCCESS',
-    data
-  }
-}
-
-export function fetchWeatherError(data) {
-  return {
-    type: 'FETCH_WEATHER_ERROR',
     data
   }
 }
@@ -35,17 +22,23 @@ export function storeLocation(city, state) {
   }
 }
 
+//store index of forecast item clicked
+export function changeIndex(val) {
+  return {
+    type: 'CHANGE_INDEX',
+    val
+  }
+}
+
+//async call to yahoo weather with input sity and state
 export function fetchWeather(currentCity, currentState) {
   let url = getURL(currentCity, currentState);
-  // console.log(url)
-  let weatherInfo = axios.get(url)
+  let weatherInfo = axios.get(url);
 
   return (dispatch) => {
-    dispatch(fetchWeatherRequest());
     dispatch(storeLocation(currentCity, currentState))
     return weatherInfo.then(
       success => dispatch(fetchWeatherSuccess(success))
-      // error => dispatch(fetchWeatherError(error))
     )
   }
 }

@@ -1,0 +1,227 @@
+html {
+  background-color: #f2f2f2; 
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #373737;
+}
+
+.root {
+  height: 100%;
+  width: 80%;
+  background-color: #f2f2f2;
+  position: relative;
+  margin: auto;
+  font-size: 1em;
+}
+.weather-title {
+  background-color: rgba(63,81,181,.5);
+  width: 100%;
+}
+.center {
+  position: relative;
+  text-align: center;
+  margin: auto;
+  display: table;
+}
+
+.forecastItem {
+  height: 50px;
+  width: 9%;
+  display: inline-block;
+  font-size: 0.9em;
+  margin: 1px;
+  border: 1px solid;
+  border-radius: 2px
+}
+
+.forecast-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.large-forecast {
+  height: 200px;
+  width: 350px;
+  position: relative;
+  margin: auto;
+  text-align: center;
+}
+
+.temperature {
+  position: relative;
+  display: inline-flex;
+  padding: 10px;
+}
+
+.add-margin {
+  margin: 10px;
+}
+
+.submit-button {
+  border: none;
+}
+
+.form-bottom {
+  margin-top: 15px;
+  border-bottom: 1px solid;
+}
+
+.location-input {
+  border: none;
+}
+
+@media only screen and (max-width: 670px) {
+  .root {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    font-size: .9em;
+  }
+  .large-forecast {
+    height: 150px;
+    width: 100%;
+    margin: 0;
+  }
+  .forecastItem {
+    height: 35px;
+    width: 9%;
+    float: left;
+    font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .temperature {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  h1, h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  input {
+    width: 35%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .weather-title {
+    background-position: fixed;
+    position: fixed;
+  }
+  .large-forecast {
+    background-position: fixed;
+    height: 0px;
+    width: 100%;
+    margin: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 70px;
+  }
+  .forecastItem {
+    height: 35px;
+    width: 48%;
+    float: left;
+    font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    top: 200px;
+    text-align: center;
+    font-size: 1.em;
+
+  }
+
+  .form-bottom {
+    margin-top: 15px;
+    width: 100%;
+    border-bottom: 1px solid;
+    position: fixed;
+    top: 170px;
+    z-index: 1000;
+  }
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) { 
+  .root {
+    postion: relative;
+    top: 100px;
+    font-size: 2.3em;
+  }
+
+  .forecastItem {
+    height: 100px;
+    width: 48%;
+    float: left;
+    font-size: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    text-align: center;
+    top: 250px;
+  }
+  
+  .form-bottom {
+    margin-top: 15px;
+    border-bottom: 1px solid;
+    width: 100%;
+    top: 270px;
+  }
+
+  .location-input {
+    width: 40%;
+    height: 50px;
+    font-size: 1em
+  }
+  .submit-button {
+    width: 100px;
+    height: 50px;
+    font-size: 1em
+  }
+
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+  .root{
+    font-size: 2.5em;
+    position: relative;
+    top: 100px;
+  }
+  .forecastItem {
+    width: 100px;
+    font-size: 1.5em;
+  }
+  .location-input {
+    width: 40%;
+    height: 50px;
+    font-size: 1em
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

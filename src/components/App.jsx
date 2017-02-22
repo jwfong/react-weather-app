@@ -2,41 +2,68 @@ import React from 'react';
 import SearchArea from './SearchArea';
 import Forecast from './Forecast';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import MainReport from './MainReport';
+import { fetchWeather } from '../actions/index';
+import '../styles.css';
+
 
 
 
 class App extends React.Component {
-
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     
   }
 
-  componentWillUpdate(nextProps, nextState) {
-
+  componentWillMount() {
+    let storedCity = window.localStorage.getItem('city');
+    let storedState = window.localStorage.getItem('state');
+    
+    if(storedCity && storedState) {
+      this.props.fetchWeather(storedCity, storedState);
+    }
   }
 
+  
+
   render() {
-    let styles = {
-      height: '100%',
-      width: '800px',
-      backgroundColor: '#f2f2f2',
-      overflowX: 'hidden',
-      position: 'relative',
-      margin: 'auto'
+
+    let {currentCity, currentState, dataReceived, data, index} = this.props.state;
+
+    let capitalize = function(str) {
+      if(!str) {
+        return;
+      }
+      let newArr = str.split(' ');
+      let newName = []
+      
+      if(newArr.length <= 1){
+        let capStr = newArr[0].split('');
+        capStr[0] = capStr[0].toUpperCase();
+        return capStr.join('');
+      } else if (newArr.length > 1) {
+          
+      let name = newArr.map( word => {
+          word = word.split('');
+          word[0] = word[0].toUpperCase();
+          newName.push(word.join(''));
+        });
+      }
+      return newName.join(' ');
     }
 
-    let {currentCity, currentState, dataReceived, data} = this.props.state;
-
     return (
-      <div style={styles}>
+      <div className="root">
         <div>
           {
-            this.props.state.dataReceived === true ?
-            <h1 style={{'position':'relative', 'textAlign': 'center'}}> Weather Forecast for {currentCity}, {currentState}</h1>
-            : <h1 style={{'position':'relative', 'textAlign': 'center'}}>Check the Weather</h1>
+            dataReceived === true ?
+            <h1 className="center weather-title"> Weather Forecast for {capitalize(currentCity)}, {capitalize(currentState)}</h1>
+            : <h1 className="center title">Check the Weather</h1>
           }
-            <Forecast data={dataReceived ? data : ''}/>
-            <SearchArea style={{position: "relative", margin:"auto", display:"table"}} click={this.props.getData}/>
+          { dataReceived === true ? <MainReport data={data} index={index} /> : ''}
+          <Forecast data={dataReceived ? data : ''}/>
+          <SearchArea className="center" click={this.props.getData}/>
         </div>
       </div>
     )
@@ -50,16 +77,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    getData: (data) => {
-      dispatch()
-    }
-  }
+  return bindActionCreators({fetchWeather}, dispatch);
 }
 
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
